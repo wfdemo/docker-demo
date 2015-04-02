@@ -1,0 +1,16 @@
+wfcassandra:
+  image: wfdemo/wildfly-cassandra
+  ports:
+   - "9990:9990"
+wfapp:
+  image: sewatech/wildfly
+  command: -b 0.0.0.0 -bmanagement 0.0.0.0
+  links:
+   - wfcassandra:cassandra
+  ports:
+   - "8080:8080"
+   - "9991:9990"
+flyng:
+  image: hasalex/fly-ng
+  ports:
+   - "80:80"
